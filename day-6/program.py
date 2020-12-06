@@ -8,3 +8,29 @@ with open('input', 'r') as file:
     
 # Trim each line
 values=[value.strip() for value in values]
+
+# Assemble groups
+groups=[]
+group=[]
+for value in values:
+    if len(value)==0:
+        groups.append(group.copy())
+        group.clear()
+        continue
+    group.append(value)
+groups.append(group.copy())
+
+group=None
+values=None
+
+# Part one: How many times did a group include a character?
+def uniqueAnswers(group):
+    values=set()
+    for line in group:
+        values=values.union(set(line))
+    return len(values)
+
+count=0
+for group in groups:
+    count+=uniqueAnswers(group)
+print("Part One:", count)
