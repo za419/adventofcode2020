@@ -47,10 +47,7 @@ def isValid(passport, required=None):
             return False
     return True
 
-# Then count passports that satisfy that condition
-count=0
-for passport in passports:
-    if isValid(passport):
-        count+=1
+# Filter down to passwords that are valid for later
+validPassports=[passport for passport in passports if isValid(passport)]
 
-print("Part one:", count, "valid passports.")
+print("Part one:", len(validPassports), "valid passports.")
