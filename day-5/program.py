@@ -36,3 +36,11 @@ def calcSeatID(seat):
 seatIDs=[calcSeatID(seat) for seat in values]
 seatIDs.sort(reverse=True)
 print("Part One: The largest seat ID is", seatIDs[0])
+
+# Part Two: Find the only seat which is a 'hole' in the IDs list
+# That means that seat-1 and seat+1 are both present, but seat itself is not.
+# Since they're both sorted, we should know where to look.
+for i in range(len(seatIDs)-1):
+    if seatIDs[i+1]==seatIDs[i]-2:
+        print("Part Two: Missing seatID", seatIDs[i]-1)
+        break
