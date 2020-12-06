@@ -11,35 +11,23 @@ values=[value.strip() for value in values]
 
 # Part One: Decode some rather insane boarding passes
 # Like seriously, what's wrong with '35C'? IT WORKS GOD DAMN YOU
-def calcSeatID(seat):
-    # First, do the row
-    row=0
-    minimum=0
-    maximum=127
+def partition(minimum, maximum, control, low, high):
     i=0
     while minimum<maximum:
-        if seat[i]=='F':
+        if control[i]==low:
             maximum=minimum+(maximum-minimum)//2
-        elif seat[i]=='B':
+        elif control[i]==high:
             minimum=maximum-(maximum-minimum)//2
         else:
-            raise ValueError('Unable to resolve seat number')
+            raise ValueError('Unable to partition')
         i+=1
-    row=minimum
+    return minimum
+
+def calcSeatID(seat):
+    # First, do the row
+    row=partition(0, 127, seat, 'F', 'B')
 
     # Now the column
-    column=0
-    minimum=0
-    maximum=7
-    while minimum<maximum:
-        print(minimum,maximum,i)
-        if seat[i]=='L':
-            maximum=minimum+(maximum-minimum)//2
-        elif seat[i]=='R':
-            minimum=maximum-(maximum-minimum)//2
-        else:
-            raise ValueError('Unable to resolve seat number')
-        i+=1
-    column=minimum
-    
+    column=partition(0, 7, seat[7:], 'L', 'R')
+
     return row*8 + column
