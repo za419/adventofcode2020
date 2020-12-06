@@ -31,3 +31,7 @@ def calcSeatID(seat):
     column=partition(0, 7, seat[7:], 'L', 'R')
 
     return row*8 + column
+
+# Calculate all IDs
+seatIDs=[calcSeatID(seat) for seat in values]
+print("Part One: The largest seat ID is", max(seatIDs))
