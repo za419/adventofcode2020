@@ -34,3 +34,15 @@ count=0
 for group in groups:
     count+=uniqueAnswers(group)
 print("Part One:", count)
+
+# Part two: How many times did everyone in a group include a character?
+def sharedAnswers(group):
+    values=set(group[0])
+    for line in group:
+        values=values.intersection(set(line))
+    return len(values)
+
+count=0
+for group in groups:
+    count+=sharedAnswers(group)
+print("Part Two:", count)
