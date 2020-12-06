@@ -34,4 +34,5 @@ def calcSeatID(seat):
 
 # Calculate all IDs
 seatIDs=[calcSeatID(seat) for seat in values]
-print("Part One: The largest seat ID is", max(seatIDs))
+seatIDs.sort(reverse=True)
+print("Part One: The largest seat ID is", seatIDs[0])
